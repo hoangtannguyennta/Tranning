@@ -38,9 +38,9 @@ class PubPolicy
      * @param  \App\Models\User  $user
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function create(User $user)
+    public function create(User $user, Pub $pub)
     {
-        //
+        return ($user->id == $pub->author_id || $user->hasPermission('create_post'));
     }
 
     /**
@@ -52,7 +52,7 @@ class PubPolicy
      */
     public function update(User $user, Pub $pub)
     {
-        return ($user->id == $pub->author_id || $user->hasPermission('update_post'));
+        return ($user->id == $pub->author_id && $user->hasPermission('update_post'));
     }
 
     /**
@@ -64,7 +64,7 @@ class PubPolicy
      */
     public function delete(User $user, Pub $pub)
     {
-        return ($user->id == $pub->author_id || $user->hasPermission('delete_post'));
+        return ($user->id == $pub->author_id && $user->hasPermission('delete_post'));
     }
 
     /**
@@ -76,7 +76,7 @@ class PubPolicy
      */
     public function restore(User $user, Pub $pub)
     {
-        return ($user->id == $pub->author_id || $user->hasPermission('restore_post'));
+        return ($user->id == $pub->author_id && $user->hasPermission('restore_post'));
     }
 
     /**
@@ -88,6 +88,6 @@ class PubPolicy
      */
     public function forceDelete(User $user, Pub $pub)
     {
-        return ($user->id == $pub->author_id || $user->hasPermission('force_delete_post'));
+        return ($user->id == $pub->author_id && $user->hasPermission('force_delete_post'));
     }
 }

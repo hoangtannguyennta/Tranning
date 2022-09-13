@@ -3,7 +3,7 @@
 
 <section class="banner banner-table">
     <div class="container">
-        <h1>{{ __('Danh sách hàng hoá') }}</h1>
+        <h1>{{ __('Danh sách bài viết') }}</h1>
         <div class="banner-table-top">
             <div class="banner-table-top-left">
                 <a class="button" href="{{ route('pubs.trash') }}"><i class="fa fa-trash-o"></i> {{ __('Thùng rác') }}</a>
@@ -11,18 +11,13 @@
             </div>
             <div class="banner-table-top-right">
                 <form action="{{ route('pubs.index') }}">
-                    <input class="input-banner" type="text" name="keyword" value="{{ $keyword }}">
+                    <input class="input-banner" placeholder="Tìm kiếm bài viết" type="text" name="keyword" value="{{ $keyword }}">
                     <input class="input-banner" type="date" name="start_date" value="{{ $start_date_value }}">
                     <input class="input-banner" type="date" name="end_date" value="{{ $end_date  }}">
                     <select class="select-banner"  name="users" id="">
                         <option value="">Chọn người dùng</option>
                         @foreach ($users_value as $user)
                             <option {{ $user->id == $users ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
-                        @endforeach
-                    </select>
-                    <select class="select-banner-list" name="pubs_users" multiple>
-                        @foreach ($users_value as $user)
-                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
                     <button class="button" type="submit">{{ __('Tìm kiếm') }}</button>
@@ -34,10 +29,10 @@
             <tr>
                 <th>{{ __('#') }}</th>
                 <th>{{ __('Ảnh') }}</th>
-                <th>{{ __('Tên sản phẩm') }}</th>
-                <th>{{ __('Số lượng') }}</th>
+                <th>{{ __('Tên bài viết') }}</th>
+                <th>{{ __('Số lượng bài viết') }}</th>
                 <th>{{ __('Giá cả') }}</th>
-                <th>{{ __('T.Tiền') }}</th>
+                <th>{{ __('Thu nhập') }}</th>
                 <th>{{ __('Chức năng') }}</th>
             </tr>
             @if(count($pubs) === 0)

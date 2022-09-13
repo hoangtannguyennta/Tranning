@@ -326,6 +326,10 @@ input, select {
     padding-top: 15px;
 }
 
+td.pubs-list-img {
+    display: inline-block;
+}
+
 .excel {
     background-color: #45a049;
 }

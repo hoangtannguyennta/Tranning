@@ -17,7 +17,6 @@ class PubRepository extends BaseRepository implements PubRepositoryInterface
         $users = isset($request->users) ?? $request->users;
         $start_date = isset($request->start_date) ?? $request->start_date;
         $end_date = isset($request->end_date) ?? $request->end_date;
-        $pubs_users = isset($request->pubs_users) ?? $request->pubs_users;
 
         return $this->model
         ->where(function ($query) use ($keyword) {
