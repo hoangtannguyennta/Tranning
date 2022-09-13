@@ -20,6 +20,11 @@
                             <option {{ $user->id == $users ? 'selected' : '' }} value="{{ $user->id }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
+                    <select class="select-banner-list" name="pubs_users" multiple>
+                        @foreach ($users_value as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                        @endforeach
+                    </select>
                     <button class="button" type="submit">{{ __('Tìm kiếm') }}</button>
                 </form>
             </div>

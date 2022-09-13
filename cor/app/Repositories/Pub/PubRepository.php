@@ -13,30 +13,28 @@ class PubRepository extends BaseRepository implements PubRepositoryInterface
 
     public function getProduct($request)
     {
-        $keyword = isset($request->keyword) ? $request->keyword : '';
-        $users = isset($request->users) ? $request->users : '';
-        $start_date = isset($request->start_date) ? $request->start_date : '';
-        $end_date = isset($request->end_date) ? $request->end_date : '';
+        $keyword = isset($request->keyword) ?? $request->keyword;
+        $users = isset($request->users) ?? $request->users;
+        $start_date = isset($request->start_date) ?? $request->start_date;
+        $end_date = isset($request->end_date) ?? $request->end_date;
+        $pubs_users = isset($request->pubs_users) ?? $request->pubs_users;
 
-        $pubs = $this->model->query();
-
-        if ($keyword) {
-            $pubs = $pubs->where(function ($query) use ($keyword) {
-                $query->where('product_name', 'like', '%'.$keyword.'%')
-                    ->orWhere('amount', 'like', '%'.$keyword.'%')
-                    ->orWhere('price', 'like', '%'.$keyword.'%');
-            });
-        };
-
-        if ($users) {
-            $pubs = $pubs->where('user_id', $users);
-        }
-
-        if ($end_date) {
-            $pubs = $pubs->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date);
-        }
-
-        return $pubs->get();
+        return $this->model
+        ->where(function ($query) use ($keyword) {
+            return $query->where('product_name', 'like', '%'.$keyword.'%')
+                ->orWhere('amount', 'like', '%'.$keyword.'%')
+                ->orWhere('price', 'like', '%'.$keyword.'%');
+        })
+        ->when($users, function ($queryUser) use ($users) {
+            return $queryUser->where('user_id', $users);
+        })
+        ->when($start_date, function ($queryStartDate) use ($start_date) {
+            return $queryStartDate->whereDate('created_at', '>=', $start_date);
+        })
+        ->when($end_date, function ($queryEndDate) use ($end_date) {
+            return $queryEndDate->whereDate('created_at', '<=', $end_date);
+        })
+        ->get();
     }
 
     public function getProductTrash($request)
@@ -46,25 +44,22 @@ class PubRepository extends BaseRepository implements PubRepositoryInterface
         $start_date = isset($request->start_date) ? $request->start_date : '';
         $end_date = isset($request->end_date) ? $request->end_date : '';
 
-        $pubs = $this->model->query();
-
-        if ($keyword) {
-            $pubs = $pubs->where(function ($query) use ($keyword) {
-                $query->where('product_name', 'like', '%'.$keyword.'%')
-                    ->orWhere('amount', 'like', '%'.$keyword.'%')
-                    ->orWhere('price', 'like', '%'.$keyword.'%');
-            });
-        };
-
-        if ($users) {
-            $pubs = $pubs->where('user_id', $users);
-        }
-
-        if ($end_date) {
-            $pubs = $pubs->whereDate('created_at', '>=', $start_date)->whereDate('created_at', '<=', $end_date);
-        }
-
-        return $pubs->onlyTrashed()->get();
+        return $this->model
+        ->where(function ($query) use ($keyword) {
+            return $query->where('product_name', 'like', '%'.$keyword.'%')
+                ->orWhere('amount', 'like', '%'.$keyword.'%')
+                ->orWhere('price', 'like', '%'.$keyword.'%');
+        })
+        ->when($users, function ($queryUser) use ($users) {
+            return $queryUser->where('user_id', $users);
+        })
+        ->when($start_date, function ($queryStartDate) use ($start_date) {
+            return $queryStartDate->whereDate('created_at', '>=', $start_date);
+        })
+        ->when($end_date, function ($queryEndDate) use ($end_date) {
+            return $queryEndDate->whereDate('created_at', '<=', $end_date);
+        })
+        ->onlyTrashed()->get();
     }
 
     public function getRecord($id)
