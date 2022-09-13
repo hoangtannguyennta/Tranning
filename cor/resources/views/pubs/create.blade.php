@@ -25,18 +25,18 @@
                     <input type="hidden" name="author_id" value="{{ Auth::user()->id }}">
                     <div class="form-content">
                         <label for="fname">{{ __('Tên hàng :') }}</label>
-                        <input class="input" type="text" id="fname" name="product_name" value="{{ Request::old('product_name') }}" placeholder="Nhập tên" required>
+                        <input class="input" type="text" id="fname" name="product_name" value="{{ old('product_name') }}" placeholder="Nhập tên">
                         <label for="lname">{{ __('Số lượng :') }}</label>
-                        <input class="input" type="number" id="lname" name="amount" value="{{ Request::old('amount') }}" placeholder="Nhập số lượng" required>
+                        <input class="input" type="number" id="lname" name="amount" value="{{ old('amount') }}" placeholder="Nhập số lượng">
                     </div>
                     <div class="form-content">
                         <label for="lname">{{ __('Giá :') }}</label>
-                        <input class="input input-price" type="number" id="lname" name="price" value="{{ Request::old('price') }}" placeholder="Nhập giá" required>
+                        <input class="input input-price" type="number" id="lname" name="price" value="{{ old('price') }}" placeholder="Nhập giá">
                         <label for="lname">{{ __('Thành viên :') }}</label>
                         <select class="select" name="user_id">
                             <option value="">Chọn thành viên nhập</option>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected': '' }}>{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -44,7 +44,7 @@
                         <label for="lname">{{ __('Thành viên sử dụng :') }}</label>
                         <select class="select" name="pubs_users[]" multiple>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                <option value="{{ $user->id }}" {{ (collect(old('pubs_users'))->contains($user->id)) ? 'selected': '' }}>{{ $user->name }}</option>
                             @endforeach
                         </select>
                     </div>
