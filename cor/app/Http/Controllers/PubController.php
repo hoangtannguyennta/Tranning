@@ -95,16 +95,20 @@ class PubController extends Controller
 
     public function update(PubRequest $request, $id)
     {
-        $this->pubRepo->postUpdate($request, $id);
-
-        return redirect()->back()->with('success', '#');
+        $user = Auth::user();
+        $pub = $this->pubRepo->find($id);
+        if ($user->can('update', $pub)) {
+            $this->pubRepo->postUpdate($request, $id);
+            return redirect()->back()->with('success', '#');
+        } else {
+            abort(403);
+        }
     }
 
     public function destroy($id)
     {
         $user = Auth::user();
         $pub = $this->pubRepo->find($id);
-
         if ($user->can('delete', $pub)) {
             $pub->delete();
             return redirect()->route('pubs.index')->with('success', '#');
@@ -117,16 +121,12 @@ class PubController extends Controller
     {
         $user = Auth::user();
         $pub = $this->pubRepo->find($id);
-
         if ($user->can('forceDelete', $pub)) {
-
             $this->pubRepo->getForceDelete($id);
             return redirect()->back()->with('success', '#');
-
         } else {
             abort(403);
         }
-
     }
 
     public function exportEx()

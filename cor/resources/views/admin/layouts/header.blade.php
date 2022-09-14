@@ -4,7 +4,7 @@
             <ul>
                 <li><a class="header-font" href="/">{{ __('Trang chủ') }}</a></li>
                 <li><a class="header-font" href="{{ route('users.index') }}">{{ __('Người dùng') }}</a></li>
-                <li><a class="header-font" href="{{ route('pubs.index') }}">{{ __('Danh sách hàng hoá') }}</a></li>
+                <li><a class="header-font" href="{{ route('pubs.index') }}">{{ __('Danh sách bài viết') }}</a></li>
             </ul>
         </div>
         <div class="header-right dropdown">

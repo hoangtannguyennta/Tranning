@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id' => 1,
-                'name' => 'nguyen',
-                'email' => 'nguyen@gmail.com',
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -26,8 +26,26 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'nguyen1',
-                'email' => 'nguyen1@gmail.com',
+                'name' => 'admin2',
+                'email' => 'admin2@gmail.com',
+                'password' => bcrypt('12345678'),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'email_verified_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'name' => 'zena',
+                'email' => 'zena@gmail.com',
+                'password' => bcrypt('12345678'),
+                'created_at' => now(),
+                'updated_at' => now(),
+                'email_verified_at' => now(),
+            ],
+            [
+                'id' => 4,
+                'name' => 'zena2',
+                'email' => 'zena2@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -49,8 +67,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('role_user')->insert([
+            [
+            'id' => 1,
             'role_id' => 1,
             'user_id' => 1,
+            ],
+            [
+                'id' => 2,
+                'role_id' => 1,
+                'user_id' => 2,
+            ],
         ]);
 
         DB::table('permission_role')->insert([
