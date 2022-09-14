@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'katakuri',
-                'email' => 'katakuri@gmail.com',
+                'name' => 'admin2',
+                'email' => 'admin2@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -44,8 +44,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'name' => 'untiled2014',
-                'email' => 'untiled2014@gmail.com',
+                'name' => 'zena2',
+                'email' => 'zena2@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -67,8 +67,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('role_user')->insert([
+            [
+            'id' => 1,
             'role_id' => 1,
             'user_id' => 1,
+            ],
+            [
+                'id' => 2,
+                'role_id' => 1,
+                'user_id' => 2,
+            ],
         ]);
 
         DB::table('permission_role')->insert([

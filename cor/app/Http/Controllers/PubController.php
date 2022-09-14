@@ -79,14 +79,9 @@ class PubController extends Controller
 
     public function store(PubRequest $request)
     {
-        $user = Auth::user();
-        $pub = $this->pubRepo->find($request->author_id);
-        if ($user->can('create', $pub)) {
-            $this->pubRepo->postCreate($request);
-            return redirect()->route('pubs.create')->with('success', '#');
-        } else {
-            abort(403);
-        }
+        $this->pubRepo->postCreate($request);
+
+        return redirect()->route('pubs.create')->with('success', '#');
     }
 
     public function edit($id)
