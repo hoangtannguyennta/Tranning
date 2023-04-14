@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PubController;
+use App\Http\Controllers\DrinkingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,10 @@ use App\Http\Controllers\PubController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/home-list', function () {
+    return view('home.list');
 });
 
 Auth::routes();
@@ -43,4 +48,14 @@ Route::group(['prefix' => 'pubs' , 'as' => 'pubs.'], function () {
     Route::post('/edit/{id}', [PubController::class, 'update'])->name('update');
     Route::post('/delete/{id}', [PubController::class, 'destroy'])->name('delete');
     Route::post('/forceDelete/{id}', [PubController::class, 'forceDelete'])->name('forceDelete');
+});
+
+
+Route::group(['prefix' => 'drinking' , 'as' => 'drinking.'], function () {
+    Route::get('/', [DrinkingController::class, 'index'])->name('index');
+    Route::get('/create', [DrinkingController::class, 'create'])->name('create');
+    Route::post('/create', [DrinkingController::class, 'store'])->name('store');
+    Route::get('/edit/{id}', [DrinkingController::class, 'edit'])->name('edit');
+    Route::post('/edit/{id}', [DrinkingController::class, 'update'])->name('update');
+    Route::post('/delete/{id}', [DrinkingController::class, 'destroy'])->name('delete');
 });

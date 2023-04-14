@@ -8,8 +8,8 @@ html,body {
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 1450px;
+    margin: auto;
 }
 
 header {
@@ -27,7 +27,7 @@ header ul li {
 
 header div {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
 }
 
 ul {
@@ -35,7 +35,8 @@ ul {
 }
 
 .header-font {
-    color: #9698a6;
+    color: #000000;
+    font-weight: bold;
     font-size: 14px;
 }
 
@@ -90,7 +91,7 @@ input, select {
 }
 
 .button {
-    background-color: #007bff;
+    background-color: #1A2669;
     border: none;
     color: white;
     text-align: center;
@@ -103,36 +104,46 @@ input, select {
 }
 
 .button-form {
-    background-color: #007bff;
+    background-color: #1A2669;
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     white-space: nowrap;
     border-radius: 0.25rem;
     font-size: 14px;
+    max-width: 140px;
     width: 100%;
 }
 
+.form-submit {
+    text-align: right;
+}
+
 .button:hover {
-    background-color: #45a049;
+    background-color: #f2f2f2;
+    color: #000000;
 }
 
 .button-form:hover {
-    background-color: #45a049;
+    background-color: #f2f2f2;
+    color: #000000;
 }
 .form {
-    width: 480px;
+    max-width: 500px;
     margin: 2% auto;
 }
 
 .form-top {
     padding: 1px 20px;
-    background-color: #f95252;
+    background-color: #1A2669;
     border-top-left-radius: 1.25em;
     border-top-right-radius: 1.25em;
     color: #ffff;
+}
+
+.form-top h4 {
+    font-weight: normal;
 }
 
 .form-bottom {
@@ -168,6 +179,14 @@ input, select {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+.dropdown-content li:nth-child(1) {
+    margin-top: 0;
+}
+
+.dropdown-content li {
+    margin: 15px 0;
 }
 
 .padding-top {
@@ -361,10 +380,47 @@ footer {
     color: #9698a6;
 }
 
-@media screen and (min-width: 360px) {
-    .select-multil {
-        margin-top: 14px;
-    }
+.home-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    background-color: white;
+    box-shadow: 1px 1px 5px 5px #e4e1e1;
+    margin-top: 35px;
+    padding: 35px;
+    border-radius: 5px;
+}
+
+.home-wrap {
+    padding-top: 35px;
+    text-align: center;
+}
+
+.home-wrap:nth-child(-n+4) {
+    padding-top: 0;
+}
+
+.home-images {
+    max-width: 100px;
+    height: 50px;
+    margin: auto;
+}
+
+.home-images img {
+   width: 100%;
+   object-fit: cover;
+}
+
+.home-text-details {
+    padding-top: 45px;
+}
+
+.home-action {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-action a {
+    margin: 5px auto;
 }
 
 @media screen and (max-width: 360px) {

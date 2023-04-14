@@ -40,7 +40,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="select-multil">
+                    <div class="form-content select-multil">
                         <label for="lname">{{ __('Thành viên sử dụng :') }}</label>
                         <select class="select" name="pubs_users[]" multiple>
                             @foreach ($users as $user)
@@ -70,7 +70,9 @@
                             <input type="hidden" name="id" value="{{ $pubs->id }}">
                         @endif
                     </div>
-                    <input type="submit" class="input button-form" value="Cập nhật">
+                    <div class="form-submit">
+                        <input type="submit" class="input button-form" value="Cập nhật">
+                    </div>
                 </form>
             </div>
           </div>

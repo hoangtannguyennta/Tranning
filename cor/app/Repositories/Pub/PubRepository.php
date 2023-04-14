@@ -18,7 +18,7 @@ class PubRepository extends BaseRepository implements PubRepositoryInterface
         $start_date = isset($request->start_date) ?? $request->start_date;
         $end_date = isset($request->end_date) ?? $request->end_date;
 
-        return $this->model
+        $data = $this->model
         ->where(function ($query) use ($keyword) {
             return $query->where('product_name', 'like', '%'.$keyword.'%')
                 ->orWhere('amount', 'like', '%'.$keyword.'%')
@@ -34,6 +34,7 @@ class PubRepository extends BaseRepository implements PubRepositoryInterface
             return $queryEndDate->whereDate('created_at', '<=', $end_date);
         })
         ->get();
+        return $data;
     }
 
     public function getProductTrash($request)

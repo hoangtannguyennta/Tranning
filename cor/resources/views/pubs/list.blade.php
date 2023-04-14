@@ -3,11 +3,11 @@
 
 <section class="banner banner-table">
     <div class="container">
-        <h1>{{ __('Danh sách bài viết') }}</h1>
+        <h1>{{ __('Danh sách menu') }}</h1>
         <div class="banner-table-top">
             <div class="banner-table-top-left">
                 <a class="button" href="{{ route('pubs.trash') }}"><i class="fa fa-trash-o"></i> {{ __('Thùng rác') }}</a>
-                <a class="button excel" href="{{ route('pubs.exportEx') }}">{{ __('Export Excel') }}</a>
+                <a class="button excel" href="{{ route('pubs.exportEx') }}"><i class="fa fa-file-excel-o"></i> {{ __('Export Excel') }}</a>
             </div>
             <div class="banner-table-top-right">
                 <form action="{{ route('pubs.index') }}">
@@ -44,9 +44,11 @@
                 <tr>
                     <td>{{ ++$k }}</td>
                     <td class="pubs-list-img">
-                        @foreach (json_decode($pub->images,true) as $image)
-                            <img src="../files_pubs/{{ $image }}">
-                        @endforeach
+                        @if ($pub->images)
+                            @foreach (json_decode($pub->images, true) as $image)
+                                <img src="../files_pubs/{{ $image }}">
+                            @endforeach
+                        @endif
                     </td>
                     <td>{{ $pub->product_name }}</td>
                     <td>{{ $pub->amount }}</td>

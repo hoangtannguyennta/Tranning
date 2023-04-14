@@ -87,5 +87,48 @@ class DatabaseSeeder extends Seeder
             ['role_id' => 1, 'permission_id' => 5],
             ['role_id' => 1, 'permission_id' => 6],
         ]);
+
+        DB::table('pubs')->insert([
+            [
+                'id' => 1,
+                'product_name' => 'Huda',
+                'amount' => 100,
+                'price' => 1000000,
+                'user_id' => 1,
+                'author_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 2,
+                'product_name' => 'Coca',
+                'amount' => 100,
+                'price' => 1000000,
+                'user_id' => 2,
+                'author_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 3,
+                'product_name' => 'Lươn',
+                'amount' => 100,
+                'price' => 1000000,
+                'user_id' => 3,
+                'author_id' => 3,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 4,
+                'product_name' => 'Gà',
+                'amount' => 100,
+                'price' => 1000000,
+                'user_id' => 4,
+                'author_id' => 4,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
     }
 }
