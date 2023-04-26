@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 use App\Http\Requests\UserRequest;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -36,7 +36,10 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $data = [
+            'roles' => Role::get(),
+        ];
+        return view('users.create', $data);
     }
 
     /**
@@ -52,7 +55,8 @@ class UserController extends Controller
         $attributes['email'] = $request->email;
         $attributes['password'] = Hash::make($request->password);
         $attributes->save();
-        return redirect()->route('users.create')->with('success', '#');
+        $attributes->roles()->attach($request->roles_id);
+        return redirect()->route('users.index')->with('success', '#');
     }
 
     /**
@@ -74,8 +78,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = User::findOrFail($id);
-        return view('users.edit', compact('users'));
+        $data = [
+            'roles' => Role::get(),
+            'users' => User::findOrFail($id),
+            'users_array' => User::findOrFail($id)->roles->pluck('id')->toArray(),
+        ];
+        return view('users.edit', $data);
     }
 
     /**
@@ -94,11 +102,8 @@ class UserController extends Controller
             $attributes['password'] = Hash::make($request->password);
         }
         $attributes->save();
-        if ($attributes->wasChanged()) {
-            return redirect()->back()->with('success', '#');
-        } else {
-            return redirect()->back();
-        }
+        $attributes->roles()->sync($request->roles_id);
+        return redirect()->route('users.index')->with('success', '#');
     }
 
     /**
@@ -111,6 +116,14 @@ class UserController extends Controller
     {
         $users = User::findOrFail($id);
         $users->delete();
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')->with('success', '#');
+    }
+
+    public function destroyAttach($id)
+    {
+        $users = User::findOrFail($id);
+        $users->roles()->detach();
+
+        return redirect()->route('users.index')->with('success', '#');
     }
 }

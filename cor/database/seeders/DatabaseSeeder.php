@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'id' => 1,
-                'name' => 'admin',
-                'email' => 'admin@gmail.com',
+                'name' => 'Nguyên',
+                'email' => 'nguyen@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'admin2',
-                'email' => 'admin2@gmail.com',
+                'name' => 'Hoàng',
+                'email' => 'hoang@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'name' => 'zena',
-                'email' => 'zena@gmail.com',
+                'name' => 'Dũng',
+                'email' => 'dung@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -44,8 +44,8 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'name' => 'zena2',
-                'email' => 'zena2@gmail.com',
+                'name' => 'Hoa',
+                'email' => 'hoa@gmail.com',
                 'password' => bcrypt('12345678'),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -54,27 +54,28 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('permissions')->insert([
-            ['name' => 'review_post'],
-            ['name' => 'create_post'],
-            ['name' => 'update_post'],
-            ['name' => 'delete_post'],
-            ['name' => 'restore_post'],
-            ['name' => 'force_delete_post'],
+            ['name' => 'review_post', 'display_name' => 'Chi tiết'],
+            ['name' => 'create_post', 'display_name' => 'Tạo mới'],
+            ['name' => 'update_post', 'display_name' => 'Cập nhật'],
+            ['name' => 'delete_post', 'display_name' => 'Xóa'],
+            ['name' => 'restore_post', 'display_name' => 'Khôi Phục'],
+            ['name' => 'force_delete_post', 'display_name' => 'Xóa vĩnh viễn'],
         ]);
 
         DB::table('roles')->insert([
-            ['name' => 'admin'],
+            ['name' => 'admin', 'display_name' => 'Quản lý'],
+            ['name' => 'user', 'display_name' => 'Người dùng'],
         ]);
 
         DB::table('role_user')->insert([
             [
-            'id' => 1,
-            'role_id' => 1,
-            'user_id' => 1,
+                'id' => 1,
+                'role_id' => 1,
+                'user_id' => 1,
             ],
             [
                 'id' => 2,
-                'role_id' => 1,
+                'role_id' => 2,
                 'user_id' => 2,
             ],
         ]);
@@ -86,6 +87,9 @@ class DatabaseSeeder extends Seeder
             ['role_id' => 1, 'permission_id' => 4],
             ['role_id' => 1, 'permission_id' => 5],
             ['role_id' => 1, 'permission_id' => 6],
+            ['role_id' => 2, 'permission_id' => 4],
+            ['role_id' => 2, 'permission_id' => 5],
+            ['role_id' => 2, 'permission_id' => 6],
         ]);
 
         DB::table('pubs')->insert([
