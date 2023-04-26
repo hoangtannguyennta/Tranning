@@ -1,19 +1,15 @@
 <header>
     <div class="container">
-        <div class="header-left">
-            <ul>
-                <li><a class="header-font" href="/">{{ __('Trang chủ') }}</a></li>
-                <li><a class="header-font" href="{{ route('users.index') }}">{{ __('Người dùng') }}</a></li>
-                <li><a class="header-font" href="{{ route('pubs.index') }}">{{ __('Danh sách bài viết') }}</a></li>
-            </ul>
-        </div>
         <div class="header-right dropdown">
             <ul>
                 @if (Auth::check())
                     <li>
-                        <a class="header-font" href="#">{{ Auth::user()->name}} <i class="fa fa-caret-down"></i></a>
+                        <a class="header-font" href="#"> {{ Auth::user()->name}} ({{ Auth::user()->roles->first()->name ?? '' }}) <i class="fa fa-caret-down"></i></a>
                     </li>
                     <div class="dropdown-content">
+                        <li><a class="header-font" href="{{ route('drinking.index') }}">{{ __('Bàn nhậu') }}</a></li>
+                        <li><a class="header-font" href="{{ route('users.index') }}">{{ __('Người dùng') }}</a></li>
+                        <li><a class="header-font" href="{{ route('pubs.index') }}">{{ __('Thực đơn') }}</a></li>
                         <form action="{{ route('logout') }}" enctype="multipart/form-data" method="POST">
                             @csrf
                             @method('POST')

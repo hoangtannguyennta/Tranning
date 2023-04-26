@@ -18,6 +18,7 @@ class PubController extends Controller
      * @var PubRepositoryInterface|\App\Repositories\Repository
      */
     protected $pubRepo;
+    protected $userRepo;
 
     public function __construct(PubRepositoryInterface $pubRepo)
     {
@@ -119,14 +120,9 @@ class PubController extends Controller
 
     public function forceDelete($id)
     {
-        $user = Auth::user();
-        $pub = $this->pubRepo->find($id);
-        if ($user->can('forceDelete', $pub)) {
-            $this->pubRepo->getForceDelete($id);
-            return redirect()->back()->with('success', '#');
-        } else {
-            abort(403);
-        }
+        $this->pubRepo->getForceDelete($id);
+
+        return redirect()->back()->with('success', '#');
     }
 
     public function exportEx()

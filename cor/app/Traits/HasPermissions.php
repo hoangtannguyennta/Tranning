@@ -38,7 +38,7 @@ trait HasPermissions
     {
         $role = $this->roles->first();
         if ($role) {
-            if (! $role->relationLoaded('permissions')) {
+            if (!$role->relationLoaded('permissions')) {
                 $this->roles->load('permissions');
             }
 
