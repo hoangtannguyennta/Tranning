@@ -8,7 +8,7 @@
         <a class="button excel" href="">{{ __('Bàn đã thanh toán') }}</a>
         <div class="home-list">
             @if (count($drinkings))
-                @foreach ($drinkings as $key => $drinking)
+                @foreach ($drinkings as $drinking)
                     <div class="home-wrap">
                         <div class="home-images">
                             <img src="{{ asset('backend/images/table3.jpg') }}" alt="">
@@ -16,7 +16,7 @@
                         <div class="home-text-details">
                             <p>{{ $drinking->name }}</p>
                             <a class="button" href="{{ route('drinking.edit', $drinking->id) }}"><i class="fa fa-edit"></i></a>
-                            <a class="button modal-pubs-success"><i class="fa fa-eye"></i></a>
+                            <a class="button modal-pubs-success modal-show-bill" data-id="{{ $drinking->id }}"><i class="fa fa-eye"></i></a>
                             <a class="button modal-pubs-delete" data-href="{{ route('drinking.delete', $drinking->id) }}"><i class="fa fa-paypal"></i> Thanh Toán</a>
                         </div>
                     </div>
@@ -28,7 +28,11 @@
     </div>
 </section>
 
+@include('modal.show_bill')
 @include('modal.modal_delete')
 @include('modal.success')
-
+<script>
+    var routeOnShow = "{{ route('drinking.onshow') }}";
+</script>
+<script src="{{ asset('backend/js/drinking.js') }}"></script>
 @endsection

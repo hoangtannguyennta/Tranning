@@ -23,15 +23,22 @@
                     @csrf
                     @method('POST')
                     <div class="form-content">
-                        <label for="fname">{{ __('Tên vai trò :') }}</label>
+                        <label for="fname">{{ __('Tên vai trò') }}</label>
                         <input class="input" type="text" id="fname" name="name" value="{{ old('name') }}" placeholder="Nhập vai trò">
-                        <label for="lname">{{ __('Mô tả vai trò :') }}</label>
+                        <label for="lname">{{ __('Mô tả vai trò') }}</label>
                         <input class="input" type="text" id="lname" name="display_name" value="{{ old('display_name') }}" placeholder="Mô tả vai trò">
-                        <label for="lname">{{ __('Chọn quyền :') }}</label>
+                        <label for="lname">{{ __('Chọn quyền') }}</label>
                         <br><br>
-                        @foreach ($permissions as $permission)
+                        {{-- @foreach ($permissions as $permission)
                             <input class="input" type="checkbox" name="permission_id[]" value="{{ $permission->id }}" placeholder="Mô tả quyền">
                             <label for="vehicle1">{{ $permission->display_name }}</label>
+                        @endforeach --}}
+                        @foreach ($userMenus as $value)
+                           <label for="">{{ $value->title }}</label><br><br>
+                           @foreach ($permissions as $permission)
+                                <input class="input" type="checkbox" name="permission_id[{{ $value->id }}][]" value="{{ $permission->id }}" placeholder="Mô tả quyền">
+                                <label for="vehicle1">{{ $permission->display_name }}</label>
+                            @endforeach
                         @endforeach
                     </div>
                     <div class="form-submit">

@@ -1,6 +1,7 @@
 <?php
 namespace App\Traits;
 
+use App\Models\Permission;
 use App\Models\Role;
 
 trait HasPermissions
@@ -10,6 +11,16 @@ trait HasPermissions
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function givePermissionsTo(array $permissions)
+    {
+        $permissions = $this->getAllPermissions($permissions);
+        if ($permissions === null) {
+            return $this;
+        }
+        $this->permissions()->saveMany($permissions);
+        return $this;
     }
 
     public function hasRole($role)
@@ -41,10 +52,24 @@ trait HasPermissions
             if (!$role->relationLoaded('permissions')) {
                 $this->roles->load('permissions');
             }
-
             $this->permissionList = $this->roles->pluck('permissions')->flatten();
         }
 
         return $this->permissionList ?? collect();
+    }
+
+    public function permissions()
+    {
+        return $this->belongsToMany(Permission::class, 'users_permissions');
+    }
+
+    protected function getAllPermissions(array $permissions)
+    {
+        return Permission::whereIn('name', $permissions)->get();
+    }
+
+    public function hasUserPermission($permission)
+    {
+        return (bool) $this->permissions->where('name', $permission)->count();
     }
 }

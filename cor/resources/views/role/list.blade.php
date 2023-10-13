@@ -13,8 +13,8 @@
         <table>
             <tr>
                 <th>{{ __('#') }}</th>
-                <th>{{ __('Tên quyền') }}</th>
-                <th>{{ __('Mô tả quyền') }}</th>
+                <th>{{ __('Tên vai trò') }}</th>
+                <th>{{ __('Mô tả vai trò') }}</th>
                 <th>{{ __('Quyền') }}</th>
                 <th></th>
             </tr>

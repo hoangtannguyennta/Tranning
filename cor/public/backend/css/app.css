@@ -12,6 +12,22 @@ html,body {
     margin: auto;
 }
 
+label {
+    font-weight: bold;
+}
+
+.image-drinking {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+}
+
+.title_drinking {
+    font-weight: bold;
+    color: #888;
+    text-align: center;
+}
+
 header {
     background-color: #ffff;
     box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
@@ -111,6 +127,18 @@ input, select {
     font-size: 10px;
 }
 
+.button_delete {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    justify-self: end;
+    background-color: #f73535;
+}
+
+.modal-content.drinking {
+    height: 100px;
+}
+
 .button-form {
     background-color: #1A2669;
     border: none;
@@ -159,6 +187,10 @@ input, select {
     padding: 20px;
     border-bottom-left-radius: 1.25em;
     border-bottom-right-radius: 1.25em;
+    height: 500px;
+    overflow-y: scroll;
+    scrollbar-color: rebeccapurple green;
+    scrollbar-width: auto;
 }
 
 .invalid-form {
@@ -343,10 +375,26 @@ input, select {
     grid-template-columns: auto auto;
 }
 
+.render-form {
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.total-drinking-css {
+    border: 1px solid #888;
+    border-radius: 10px;
+    padding: 15px;
+}
+
 .form-content {
     display: grid;
     grid-template-columns: 30% 70%;
     align-items: center;
+}
+
+.form-content.render-form {
+    margin-top: 15px;
 }
 
 .select-multiple {
@@ -429,6 +477,26 @@ footer {
 
 .home-action a {
     margin: 5px auto;
+}
+
+.title-bill, .andress-bill {
+    text-align: center;
+}
+
+.title-table-bill {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.table-column-drink {
+    display: grid;
+    grid-template-columns: 40% 20% 20% 20%;
+    grid-gap: 10px;
+    margin-top: 40px;
+    border-top-style: dotted;
+    border-bottom-style: dotted;
+    padding: 20px 10px 20px 10px;
 }
 
 @media screen and (max-width: 360px) {

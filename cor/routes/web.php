@@ -35,15 +35,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'users' , 'as' => 'users.', 'middleware' => 'role:admin'], function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
-    Route::post('/create', [UserController::class, 'store'])->name('store')->middleware('role:admin,create_post');
+    Route::post('/create', [UserController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit');
-    Route::post('/edit/{id}', [UserController::class, 'update'])->name('update')->middleware('role:admin,update_post');
+    Route::post('/edit/{id}', [UserController::class, 'update'])->name('update');
     Route::post('/delete/{id}', [UserController::class, 'destroy'])->name('delete');
     Route::post('/destroyAttach/{id}', [UserController::class, 'destroyAttach'])->name('delete_attach');
 });
 
 
-Route::group(['prefix' => 'pubs' , 'as' => 'pubs.'], function () {
+Route::group(['prefix' => 'pubs' , 'as' => 'pubs.', 'middleware' => 'role:admin'], function () {
     Route::get('/', [PubController::class, 'index'])->name('index');
     Route::get('/trash', [PubController::class, 'trash'])->name('trash');
     Route::get('/record/{id}', [PubController::class, 'record'])->name('record');
@@ -57,13 +57,16 @@ Route::group(['prefix' => 'pubs' , 'as' => 'pubs.'], function () {
 });
 
 
-Route::group(['prefix' => 'drinking' , 'as' => 'drinking.'], function () {
+Route::group(['prefix' => 'drinking' , 'as' => 'drinking.', 'middleware' => 'role:admin'], function () {
     Route::get('/', [DrinkingController::class, 'index'])->name('index');
     Route::get('/create', [DrinkingController::class, 'create'])->name('create');
     Route::post('/create', [DrinkingController::class, 'store'])->name('store');
     Route::get('/edit/{id}', [DrinkingController::class, 'edit'])->name('edit');
     Route::post('/edit/{id}', [DrinkingController::class, 'update'])->name('update');
     Route::post('/delete/{id}', [DrinkingController::class, 'destroy'])->name('delete');
+    Route::get('/onshow', [DrinkingController::class, 'onShow'])->name('onshow');
+    Route::get('/onchange', [DrinkingController::class, 'onChange'])->name('onchange');
+    Route::get('/onchangeValidation', [DrinkingController::class, 'onchangeValidation']);
 });
 
 Route::group(['prefix' => 'permission' , 'as' => 'permission.'], function () {

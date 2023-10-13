@@ -9,39 +9,62 @@
     <div class="container">
         <div class="form">
             <div class="form-top">
-                <h4>{{ __('Tạo bàn nhậu') }}</h4>
+                <h4>{{ __('Thêm mới') }}</h4>
             </div>
             <div class="form-bottom">
-                @if ($errors->any())
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li class="invalid-form">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                @endif
-                <form action="{{ route('drinking.store') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ route('drinking.store') }}" id="form-submit-drinking" enctype="multipart/form-data" method="POST">
                     @csrf
                     @method('POST')
                         <div class="form-content">
-                            <label for="fname">{{ __('Chọn bàn') }}</label>
+                            <label for="fname">{{ __('Nhập bàn') }}</label>
                             <input class="input" type="text" id="fname" name="name" value="{{ old('name') }}" placeholder="Nhập tên bàn">
                         </div>
-                        <div class="form-content">
-                            @foreach ($pubs as $pub)
-                                <span class="checkmark">{{ $pub->product_name }} ({{ $pub->amount }})</span>
-                                <input class="input" type="number" id="lname" name="amount[]"  value="" placeholder="Nhập số lượng">
-                                <input type="hidden" value="{{ $pub->id }}" name="drinking[]">
-                            @endforeach
+                        <div class="form-content form-select-drinking">
+                            <label for="fname">{{ __('Menu') }}</label>
+                            <select class="select" name="drinking[]" id="drinking_select">
+                                <option>Lựa chọn Menu</option>
+                                @foreach ($pubs as $pub)
+                                    <option value="{{ $pub->id }}">{{ $pub->product_name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <br>
+                        <div class="form-content total-drinking-css">
+                            <label for="fname"></label>
+                            <div style="text-align: right">
+                                <label for="">Tổng tiền hóa đơn</label>
+                                <div>
+                                    <label class="total-drink" style="color: red">
+                                        0 ₫
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <label for="lname">{{ __('Hình ảnh') }}</label>
+                        <div class="input-group hdtuto control-group lst increment" >
+                            <div class="list-input-hidden-upload">
+                                <input type="file" name="images[]" id="file_upload" class="myfrm form-control hidden">
+                            </div>
+                            <div class="input-group-btn">
+                                <button class="btn btn-success btn-add-image" type="button"><i class="fldemo glyphicon glyphicon-plus"></i>+ Chọn hình ảnh</button>
+                            </div>
+                        </div>
+                        <div class="list-images">
                         </div>
                         <div class="form-submit">
-                            <input type="submit" class="input button-form" value="Thêm">
+                            <input type="submit" class="input button-form" value="Thêm mới">
                         </div>
                 </form>
             </div>
           </div>
     </div>
 </section>
-
 @include('modal.success')
-
+@include('modal.amount')
+<script>
+    var routeAjaxOnchange = "{{ route('drinking.onchange') }}";
+    var routeOnchangeValidation = "{{ route('drinking.onchangeValidation') }}";
+</script>
+<script src="{{ asset('backend/js/drinking.js') }}"></script>
 @endsection

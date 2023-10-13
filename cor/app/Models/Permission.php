@@ -15,4 +15,15 @@ class Permission extends Model
         'name',
         'display_name',
     ];
+
+    public function roles()
+    {
+
+        return $this->belongsToMany('App\Models\Role', 'roles_permissions');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'users_permissions', 'user_id', 'permission_id');
+    }
 }

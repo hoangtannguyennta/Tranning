@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use App\Http\Requests\UserRequest;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -38,6 +39,7 @@ class UserController extends Controller
     {
         $data = [
             'roles' => Role::get(),
+            'permissions' => Permission::get(),
         ];
         return view('users.create', $data);
     }
@@ -56,6 +58,7 @@ class UserController extends Controller
         $attributes['password'] = Hash::make($request->password);
         $attributes->save();
         $attributes->roles()->attach($request->roles_id);
+        $attributes->permissions()->attach($request->permissions_id);
         return redirect()->route('users.index')->with('success', '#');
     }
 

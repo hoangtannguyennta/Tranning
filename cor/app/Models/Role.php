@@ -20,4 +20,10 @@ class Role extends Model
     {
         return $this->belongsToMany('App\Models\Permission', 'permission_role', 'role_id', 'permission_id');
     }
+
+    public function rolesMenu()
+    {
+        return $this->belongsToMany('App\Models\UsersMenu', 'role_menu', 'role_id', 'menu_id')
+            ->withPivot('permission_id');
+    }
 }

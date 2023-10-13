@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Repositories\Permission\PermissionRepositoryInterface;
+use App\Models\UsersMenu;
 
 class RoleController extends Controller
 {
@@ -35,6 +36,7 @@ class RoleController extends Controller
     public function create()
     {
         $data = [
+            'userMenus' => UsersMenu::get(),
             'permissions' => $this->permissionRepo->getProduct(),
         ];
         return view('role.create', $data);
@@ -54,6 +56,7 @@ class RoleController extends Controller
             'permission_array' => $role->permissions->pluck('id')->toArray(),
             'role' => $role,
             'permissions' => $this->permissionRepo->getProduct(),
+            'userMenus' => UsersMenu::get(),
         ];
         return view('role.edit', $data);
     }

@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Models\Role', 'role_user', 'user_id', 'role_id');
     }
+
+    public function permissions()
+    {
+        return $this->belongsToMany('App\Models\Permission', 'users_permissions', 'user_id', 'permission_id');
+    }
 }

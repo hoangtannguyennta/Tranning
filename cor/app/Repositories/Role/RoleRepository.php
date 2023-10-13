@@ -18,13 +18,20 @@ class RoleRepository extends BaseRepository implements RoleRepositoryInterface
 
     public function createProduct($params)
     {
+        $arrays = array();
+        foreach ($params->permission_id as $key => $value) {
+            foreach ($value as $value2) {
+                array_push($arrays, ['menu_id' => $key, 'permission_id' => $value2]);
+            }
+        }
+
         $role = $this->model->create($params->all());
-        $role->permissions()->attach($params->permission_id);
+        $role->rolesMenu()->attach($arrays);
     }
 
     public function edit($params)
     {
-        return $this->model->find($params);
+        return $this->model->with('rolesMenu')->find($params);
     }
 
     public function updateProduct($params, $id)

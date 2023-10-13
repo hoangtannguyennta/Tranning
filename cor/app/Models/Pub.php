@@ -32,6 +32,13 @@ class Pub extends Model
         return $this->belongsToMany('App\Models\User', 'pubs_users', 'pubs_id', 'users_id');
     }
 
+    public function pubDrinkings()
+    {
+        return $this->belongsToMany('App\Models\Drinking', 'drinking_pubs', 'pubs_id', 'drinking_id')
+            ->withPivot('amount')
+            ->withTimestamps();
+    }
+
     public function setImagesAttribute($value)
     {
         $this->attributes['images'] = json_encode($value);

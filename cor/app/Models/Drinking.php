@@ -14,6 +14,8 @@ class Drinking extends Model
 
     protected $fillable = [
         'name',
+        'images',
+        'total',
     ];
 
     public function drinkingPubs()
@@ -21,5 +23,10 @@ class Drinking extends Model
         return $this->belongsToMany('App\Models\Pub', 'drinking_pubs', 'drinking_id', 'pubs_id')
         ->withPivot('amount')
         ->withTimestamps();
+    }
+
+    public function setImagesAttribute($value)
+    {
+        $this->attributes['images'] = json_encode($value);
     }
 }
